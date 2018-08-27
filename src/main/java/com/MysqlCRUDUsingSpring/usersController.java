@@ -23,7 +23,7 @@ public class usersController {
 	
 	@GetMapping(value = "/users")
 	public List<users> getAll(HttpServletResponse response){
-		response.setHeader("Cache-Control", "no-transform, public, max-age=2");
+		response.setHeader("Cache-Control", "no-transform, public, max-age=600");
 	    response.setHeader("Pragma", "");
 		return userpository.findAll();
 		
@@ -31,14 +31,14 @@ public class usersController {
 	
 	@RequestMapping(value = "/users/{userId}")
 	public Optional<users> UserById(HttpServletResponse response,@PathVariable int userId){
-		response.setHeader("Cache-Control", "no-transform, public, max-age=2");
+		response.setHeader("Cache-Control", "no-transform, public, max-age=600");
 	    response.setHeader("Pragma", "");
 		return userpository.findById(userId);
 	}
 
 	@PostMapping(value = "/users")
 	public List<users> persist(HttpServletResponse response, @RequestBody users person){
-		response.setHeader("Cache-Control", "no-transform, public, , max-age=1");
+		response.setHeader("Cache-Control", "no-transform, public, , max-age=600");
 	    response.setHeader("Pragma", "");
 		userpository.save(person);
 		return userpository.findAll();
@@ -46,14 +46,14 @@ public class usersController {
 	
 	@RequestMapping(method = RequestMethod.PUT, value = "/users/{userId}")
 	public void updateUser(HttpServletResponse response, @RequestBody users person ,@PathVariable int userId ) {
-		response.setHeader("Cache-Control", "no-transform, public, max-age=2");
+		response.setHeader("Cache-Control", "no-transform, public, max-age=600");
 	    response.setHeader("Pragma", "");
 		userpository.save(person);
 	}
 	
 	@RequestMapping(method = RequestMethod.DELETE, value = "/users/{userId}")
 	public void deleteUser(HttpServletResponse response, @PathVariable int userId) {
-		response.setHeader("Cache-Control", "no-transform, public, max-age=2");
+		response.setHeader("Cache-Control", "no-transform, public, max-age=600");
 	    response.setHeader("Pragma", "");
 		userpository.deleteById(userId);
 	}
